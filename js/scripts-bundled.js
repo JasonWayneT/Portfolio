@@ -479,31 +479,53 @@ $(function() {
 })( jQuery );
 // Modules
 
-class GrowCard{
-    constructor(){
-        this.wrapper = document.querySelectorAll('.portfolio__imgWrapper');
-        this.card = document.querySelectorAll('.portfolio__card');
-        this.img = document.querySelectorAll('.portfolio__img');
+class GrowCard {
+    constructor() {
+        this.container = document.querySelector('.imgContainer');
+        this.overlay = document.querySelectorAll('.portfolio__imgOverlay');
+        this.imgContainer = document.querySelectorAll('.portfolio__imgWrapper');
         this.events();
+        
     }
 
     events(){
-        this.img.addEventListener('click', this.createOverlay );
-
-        this.card.addEventListner('click', this.createOverlay);
-
-        this.card.addEventListener('click', this.createOverlay);
-    }
-
-
-    createOverlay(){
+        for(let i = 0; i < this.overlay.length ; i++){
+          let  overlays = this.overlay[i];
+            overlays.addEventListener('mouseenter', this.createOverlay.bind(this), false);
+        }
+        
+        this.container.addEventListener('mouseover', this.removeOverlay.bind(this));
         
     }
+
+
+    createOverlay(e){
+        // console.log(e.target);
+    
+            if(e.target.classList.contains('portfolio__imgOverlay')){
+               e.target.parentNode.classList.add('active')
+           
+            }
+        }
+    
+
+    removeOverlay(e){
+        if(e.target.classList.contains('imgContainer')){
+         
+            for(let i = 0; i < this.imgContainer.length ; i++){
+                let  img = this.imgContainer[i];
+                  img.classList.remove('active');
+              }
+      
+        }
+    }
+
 }
 
 
+      
 
 
 
 let growCard = new GrowCard();
-//# sourceMappingURL=scripts-bundled.js.map
+

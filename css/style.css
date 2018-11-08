@@ -1093,11 +1093,13 @@ body {
   width: 32rem;
   position:relative;
   margin:2rem;
+  transition-duration: 800ms;
 }
 
 
 .portfolio__imgOverlay{
   position:absolute;
+  /* pointer-events: none; */
   height:100%;
   width:100%;
   background:rgba(0,0,0,1);
@@ -1106,12 +1108,16 @@ body {
   flex-direction:column;
   text-align:center;
   opacity:0;
+  border: #fccb0a solid 1px;
+  border-radius: 5px;
+  transition-duration:800ms;
 
 }
 
 .portfolio__imgOverlay h4{
   padding-top:2rem;
   padding-bottom:3rem;
+  pointer-events:none;
 }
 .portfolio__img {
     position:absolute;
@@ -1274,6 +1280,14 @@ padding:4rem;
 /*///////////////////////////////////*/
 /*State*/
 /*///////////////////////////////////*/
+.active{
+  transition-duration: 800ms;
+  height: 28rem;
+  width: 35rem;
+}
+.visible{
+  opacity:.8;
+}
 .mobileHide {
   visibility: none;
   display: none;
