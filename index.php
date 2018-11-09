@@ -148,36 +148,34 @@
                 </div>
             </section>
         </div>
+        <div class="container-fluid">
+            <div class="row relative"> 
+                <section class= "portfolio twelve columns flex-wrapper vertical bringUp row" id='portfolio'>
         
-        <div class="row relative"> 
-     
-            <section class= "portfolio twelve columns flex-wrapper vertical bringUp row" id='portfolio'>
-       
                     <h2 class="content-header"><span style="color: #FCCB0A" >02</span> Portfolio</h2>
                     <h4>Check out my recent work</h4>
                     <div class="imgContainer">  
-                    
-                         
-            <?php $entryPosts = new WP_Query( array(
-                'post_type'=>'pentry',
-                'post_per_page'=>-1
-            ) );
-            
-            while($entryPosts->have_posts()){
-                $entryPosts->the_post();
-                ?>
-                   <div class="portfolio__imgWrapper">
-                            <div class="portfolio__imgOverlay">
-                                <h4> <?php echo get_the_title()?></h4>
-                                <a href="<?php echo esc_url(the_permalink())?>"> <button class="button--single">More Info</button></a>
-                                <a href="<?php echo get_field('link')?>"><button class="button--single">Check Out the Site</button></a>
-                            </div>
-                            <img class="portfolio__img"src="<?php echo get_field('img')['sizes']['large']?> ">               
-                    </div>
-                <?php wp_reset_postdata(); }
-            ?>
-
-            </section>
+                        
+                        <?php $entryPosts = new WP_Query( array(
+                            'post_type'=>'pentry',
+                            'post_per_page'=>-1
+                        ) );
+                        
+                        while($entryPosts->have_posts()){
+                            $entryPosts->the_post();?>
+                            
+                                <div class="portfolio__imgWrapper">
+                                    <div class="portfolio__imgOverlay">
+                                        <h4> <?php echo get_the_title()?></h4>
+                                        <a href="<?php echo esc_url(the_permalink())?>"> <button class="button--single">More Info</button></a>
+                                        <a href="<?php echo get_field('link')?>"><button class="button--single">Check Out the Site</button></a>
+                                    </div>
+                                    <img class="portfolio__img"src="<?php echo get_field('img')['sizes']['large']?> ">               
+                                </div>
+                        <?php wp_reset_postdata(); } ?>       
+                    </div> 
+                </section>
+            </div>
         </div>
 
         <span class='contactfix' id='highcontact'></span>
