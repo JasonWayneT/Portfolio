@@ -21,11 +21,18 @@
                             </ul>
                         </nav> -->
                     </div>
-            <div class=" hero-content flex-wrapper vertical center">
-                <h1 class='hero-text' id='aboutme'>Hi</h1>
-                <h1 class= 'hero-text'>I<span style='color:#FCCB0A'>'</span>m</h1>
-                <h1 class= 'hero-text'>Jason Taylor</h1>
-                <h5 class= 'hero-text' > A Front End Developer</h5>
+            <div class=" hero-content flex-wrapper  center">
+
+                <div class="hero__img">
+                    <img  class='hero__imgPic'src="<?php echo get_template_directory_uri() . '/assets/myImg.jpg' ?>" alt="">
+                </div>
+                <div class="hero__textContainer">
+                    <h1 class='hero-text' id='aboutme'>Hi</h1>
+                    <h1 class= 'hero-text'>I<span style='color:#FCCB0A'>'</span>m</h1>
+                    <h1 class= 'hero-text'>Jason Taylor</h1>
+                    <h5 class= 'hero-text' > A Front End Developer</h5>
+                </div>
+                
             </div>
         </header>
              
@@ -37,18 +44,28 @@
                     <img src="<?php echo get_template_directory_uri() . '/assets/logo.png' ?>" alt="logo" class= "float-box__logo" > 
                 </div>
                 <p class='float-box__text'>               
-                A passionate Front-End Developer who specializes in HTML, CSS, and Javascript. 
-                I'm currently looking to further develop in a professional setting. After exploring 
-                my portfolio I would like to invite you to check out my social links to get a better
-                feel for who I am and how I can bring value to your business. Please feel free to
-                contact me if you have any questions.
+                <?php 
+                $profile = new WP_Query(
+                    array(
+                        'post_type'=>'profile',
+                        'post_per_page'=>'1'
+                    )
+                );
+                while($profile->have_posts()){
+                    $profile->the_post();?>
+                    <?php the_content() ?>
+                    
+               <?php }
+                
+                              
+                wp_reset_postdata(); ?>
 
                 </p>
-               <a href='#highcontact' >
+               
                     <button class='button'>
-                        Contact Me  
+                    <a href='#highcontact' > Contact Me    </a>
                     </button>
-               </a>
+             
                <div class=" flex-wrapper flex-center float-box_socialIcons ">
                     <a href='https://github.com/JasonWayneT' target="_blank"> 
                         <div class='socialIcons'>
@@ -119,41 +136,54 @@
                 </div> 
             </section>
         </div>
-        
-        <div class="row">
-            <section class= 'twelve column flex-wrapper vertical primaryImage' id="skills">
-                <div class="content-box flex-wrapper  vertical">
-                    <h2 class= 'center' > <span style="color: #FCCB0A"> 01</span> Skills</h2>
-                    <h4 class = 'center'>My Proficiencies</h4>
-                    <ul class='flex-wrapper vertical row'>
-                        <div class="noWrap flex-center" id='skills'>
-                            <li class='skills '>HTML5 & CSS3/Sass</li> <div class="skills__barBase"> <div class=" skills__bar" id='gHTML'></div></div><p class='skills--font'>Very Confident</p>
+        <div class="container-fluid">
+            <div class="row">
+            <section class= "primaryImage twelve columns flex-wrapper vertical  row">
+                <h2 class="content-header talignCenter  spacer "><span style="color: #FCCB0A" >01</span> Showcase</h2>
+                <h4 class= 'talignCenter'>Recent Highlights</h4>
+                    <div class=" flex-wrapper  vertical noWrap">
+                    
+                        <div class="hightlight__container">
+                        <?php $showCase = new WP_Query( array(
+                            'post_type'=>'showcase',
+                            'post_per_page'=>1
+                        ) );
+
+                        while($showCase->have_posts()){
+                            $showCase->the_post();?>
+                            <div class="half alignSelfStart">
+                                <div class="highlight__thumbnail">
+                                    <img src="<?php echo get_field('thumbnail')['sizes']['large']?>" alt="">
+                                </div>
+                                <div class="highlight__buttons">
+                                    <button class="button--small"> <a href="<?php echo esc_url(the_permalink())?>">More Info</a></button>
+                                    <button class="button--small"><a href="<?php echo esc_url(get_field('link'))?>">Check Out the Site</a></button>
+                                </div>
+                            </div>
+                            <div class="half">
+                            <div class="highlight__description">
+                                    <div class="highlight__descriptionTitle">
+                                        <h4><?php the_title()?></h4>
+                                    </div>
+                                    <div class="highlight__descriptionBody">
+                                        <p><?php the_content()?></p>
+                                    </div>
+                                </div>
+                             </div>
+                        <?php }  wp_reset_postdata();  ?>      
+                            
+                           
                         </div>
-                        <div class="noWrap">
-                            <li class='skills'>Wordpress</li><div class="skills__barBase"> <div class="skills__bar " id='gWordPress'></div></div><p class='skills--font'>Comfortable</p>
-                        </div>
-                        <div class="noWrap">
-                            <li class='skills'>Illustrator CC</li><div class="skills__barBase"> <div class="skills__bar " id='gIllustrator'></div></div><p class='skills--font'>Very Comfortable</p>
-                        </div>   
-                        <div class="noWrap">
-                            <li class='skills'>Photoshop CC</li><div class="skills__barBase"> <div class="skills__bar " id='gPhotoshop'></div></div><p class='skills--font'>Got the Basics</p>
-                        </div> 
-                        <div class="noWrap">
-                                <li class='skills'>Javascript</li><div class="skills__barBase"> <div class="skills__bar " id='gJavascript'></div></div><p class='skills--font'>Always Improving</p>
-                        </div>
-                        <div class="noWrap row">
-                            <li class='skills'>Bootstrap 4</li><div class="skills__barBase  seven columns"> <div class="skills__bar " id='gBootStrap'></div></div><p class='skills--font'>Comfortable</p>
-                        </div>
-                    </ul>
-                </div>
-            </section>
+                    </div>
+                </section>
+            </div>
         </div>
         <div class="container-fluid">
             <div class="row relative"> 
                 <section class= "portfolio twelve columns flex-wrapper vertical bringUp row" id='portfolio'>
         
-                    <h2 class="content-header"><span style="color: #FCCB0A" >02</span> Portfolio</h2>
-                    <h4>Check out my recent work</h4>
+                    <h2 class="content-header "><span style="color: #FCCB0A" >02</span> Portfolio</h2>
+                    <h4 class="talignCenter">Check out my recent work</h4>
                     <div class="imgContainer">  
                         
                         <?php $entryPosts = new WP_Query( array(
@@ -167,8 +197,8 @@
                                 <div class="portfolio__imgWrapper">
                                     <div class="portfolio__imgOverlay">
                                         <h4> <?php echo get_the_title()?></h4>
-                                        <a href="<?php echo esc_url(the_permalink())?>"> <button class="button--single">More Info</button></a>
-                                        <a href="<?php echo get_field('link')?>"><button class="button--single">Check Out the Site</button></a>
+                                        <button class="button--single"> <a href="<?php echo esc_url(the_permalink())?>">More Info</a></button>
+                                        <button class="button--single"><a href="<?php echo get_field('link')?>">Check Out the Site</a></button>
                                     </div>
                                     <img class="portfolio__img"src="<?php echo get_field('img')['sizes']['large']?> ">               
                                 </div>
@@ -184,7 +214,7 @@
             <section class=' center  moveUp flex-wrapper float-box '>
                 <div class='flex-wrapper vertical'>
                     <div class= 'flex-wraper vertical' > 
-                        <h2><span style="color: #FCCB0A" class='center' > 0<span style='position:relative; bottom:4.95px; font-size:3.5rem'>3</span> </span>Contact</h2>
+                        <h2><span style="color: #FCCB0A" class='center' > 03</span> </span>Contact</h2>
                         <h3 class= 'float-box__text--h3'>
                             Let's Talk
                         </h3> 
